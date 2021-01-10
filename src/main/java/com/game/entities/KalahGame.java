@@ -1,15 +1,11 @@
 package com.game.entities;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.game.Enum.GameStatus;
 import com.game.Enum.KalahGameType;
 import com.game.Enum.Seat;
-import com.game.context.KalahContext;
-import com.game.model.PlayerAreaInfo;
 import com.game.strategy.MoveStrategy;
 
 public final class KalahGame implements Serializable {
@@ -17,11 +13,9 @@ public final class KalahGame implements Serializable {
 
 	private int gameId;
 	private GameStatus gameStatus = GameStatus.WAITING;;
-	private int seatedPlayerCount = 0;
-	public static final int MAX_PLAYER_COUNT = 2;
 	private KalahGameType gameType;
-	private final Map<Seat,PlayerArea> gameAreaMap = new HashMap<>();
-	private final Map<Player,Seat> playersMap = new HashMap<>();
+	private Room room;
+	Player disAllowedPlayer;
 
 	private MoveStrategy action;
 
@@ -30,59 +24,61 @@ public final class KalahGame implements Serializable {
 		this.gameStatus = GameStatus.WAITING;
 		this.gameType = kalahType;
 		this.action = new MoveStrategy(this);
-		this.gameAreaMap.put(Seat.NORTH,PlayerArea.getArea(new PlayerAreaInfo(Seat.NORTH,gameType)));
-		this.gameAreaMap.put(Seat.SOUTH,PlayerArea.getArea(new PlayerAreaInfo(Seat.SOUTH,gameType)));
-
+		this.room = Room.getInstance(this);
 	}
-	
-	
-	public boolean makeMoveAllowed() {
-		
-		return false;
+
+	public void makeMoveDisAllowed(Player player) {
+		disAllowedPlayer=player;
 	}
 
 	public static KalahGame getInstance(KalahGameType kalahType) {
-		KalahGame game =  new KalahGame(kalahType);
+		KalahGame game = new KalahGame(kalahType);
 		return game;
 	}
 
-	
-	public PlayerArea getPlayerArea(Seat seatType) {
-		return this.gameAreaMap.get(seatType);
+	public Room getRoom() {
+		return this.room;
 	}
+
+	public PlayerArea getPlayerArea(Seat seatType) {
+		return getRoom().getPlayerArea(seatType);
+	}
+
 	public boolean isWaiting() {
 		return gameStatus == GameStatus.WAITING;
 	}
 
 	public KalahGame joinPlayer(Player playerInfo) {
-		if(this.seatedPlayerCount==0) {
-			this.playersMap.put(playerInfo, Seat.NORTH);
-		}else {
-			this.playersMap.put(playerInfo, Seat.SOUTH);
-		}
-		this.seatedPlayerCount++;
-		this.updateState();
+		getRoom().joinPlayer(playerInfo);
+		this.updateStateIfAny();
 		return this;
 	}
-	
+
 	public Seat getPlayerSeat(Player player) {
-		return this.playersMap.get(player);
+		return getRoom().getPlayerSeat(player);
 	}
-	
+
 	public Seat getCurrentTurnPlayerSeat() {
-		Player turnPlayer = KalahContext.getTurnPlayer();
-        return getPlayerSeat(turnPlayer);
+		return room.getCurrentTurnPlayerSeat();
 	}
-	
-	private void updateState() {
-		if(playersMap.size() == MAX_PLAYER_COUNT) {
+
+	public void updateStateIfAny() {
+		if (getRoom().isFull()) {
 			startGame();
 		}
+		if(getRoom().containsEmptyPlayerArea()) {
+			GameOver();
+		}
+
+	}
+
+	private void GameOver() {
+		this.gameStatus= GameStatus.GAMEOVER;
 		
 	}
-	
+
 	public PlayerArea getCurrentTurnPlayerArea() {
-		return this.gameAreaMap.get(getCurrentTurnPlayerSeat());
+		return room.getCurrentTurnPlyrArea();
 	}
 
 	private void startGame() {
@@ -102,7 +98,7 @@ public final class KalahGame implements Serializable {
 	}
 
 	public int getSeatedPlayerCount() {
-		return seatedPlayerCount;
+		return this.room.size();
 	}
 
 	public KalahGame makeMove(int pitId) {
@@ -113,6 +109,14 @@ public final class KalahGame implements Serializable {
 
 	public MoveStrategy getMoveStrategy() {
 		return action;
+	}
+
+	public boolean hasGameStatus(GameStatus gameStatus) {
+		return this.gameStatus == gameStatus;
+	}
+
+	public boolean isMoveAllowed(Player playerInfo) {
+		return  playerInfo != this.disAllowedPlayer;
 	}
 
 }

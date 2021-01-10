@@ -1,6 +1,7 @@
 package com.game.context;
 
 import com.game.entities.Player;
+import com.game.entities.PlayerArea;
 
 public class KalahContext {
 
@@ -16,5 +17,14 @@ public class KalahContext {
 	
 	public static Player getTurnPlayer() {
 		return gameThreadLocal.get().getTurnPlayer();
+	}
+
+	public static void setCurrentTurnPlayerArea(PlayerArea currentTurnPlyrArea) {
+		gameThreadLocal.get().setTurnPlayerArea(currentTurnPlyrArea);
+		
+	}
+	
+	public static PlayerArea getCurrentTurnPlayerArea() {
+		return gameThreadLocal.get().getTurnPlayerArea();
 	}
 }

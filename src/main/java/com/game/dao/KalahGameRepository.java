@@ -15,7 +15,7 @@ public class KalahGameRepository {
 	
 	private final Map<Integer,KalahGame> games = new HashMap<>();
 	public KalahGame getGame(GameStatus gameStatus) {
-		Optional<KalahGame> kalha =  games.values().stream().filter(x-> x.getGameStatus()== gameStatus).findFirst();
+		Optional<KalahGame> kalha =  games.values().stream().filter(x-> x.hasGameStatus(gameStatus)).findFirst();
 		if(kalha.isPresent()) {
 		  return kalha.get();	
 		}
