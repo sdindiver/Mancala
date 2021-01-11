@@ -1,4 +1,4 @@
-# Mancala (Kalah) Game [![Build Status](https://travis-ci.com/sdindiver/Mancala.svg?branch=main)](https://travis-ci.com/github/sdindiver/Mancala)[![Coverage Status](https://coveralls.io/repos/github/sdindiver/Mancala/badge.svg)](https://coveralls.io/github/sdindiver/Mancala)
+# Mancala (Kalah) Game [![Build Status](https://travis-ci.com/sdindiver/Mancala.svg?branch=main)](https://travis-ci.com/github/sdindiver/Mancala) [![Coverage Status](https://coveralls.io/repos/github/sdindiver/Mancala/badge.svg)](https://coveralls.io/github/sdindiver/Mancala)
 Mancala(Kalah) Microservice 3/4/6 stones 
 
 This web service should enable to let 2 human players to play the game, each in his own computer. There is no AI
