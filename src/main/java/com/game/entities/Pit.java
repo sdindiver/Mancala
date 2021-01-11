@@ -28,6 +28,31 @@ public class Pit implements Comparable<Pit>, Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((pitId == null) ? 0 : pitId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pit other = (Pit) obj;
+		if (pitId == null) {
+			if (other.pitId != null)
+				return false;
+		} else if (!pitId.equals(other.pitId))
+			return false;
+		return true;
+	}
+
+	@Override
 	public int compareTo(Pit secondPit) {
 		return pitId.compareTo(secondPit.getPitId());
 	}

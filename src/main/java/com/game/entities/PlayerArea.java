@@ -55,4 +55,8 @@ public final class PlayerArea {
 	public Collection<Pit> getPits(){
 		return this.pitIdPitMap.values();
 	}
+
+	public boolean contains(Pit pit) {
+		return this.pitIdPitMap.values().contains(pit);
+	}
 }

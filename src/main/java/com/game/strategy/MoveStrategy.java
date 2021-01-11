@@ -33,9 +33,9 @@ public class MoveStrategy {
 		Pit finalPit = game.getRoom().getPit(finalPitIdx);
 		if(!finalPit.isKalah()) {
 			game.makeMoveDisAllowed(KalahContext.getTurnPlayer());
-
 		}
-		if(finalPit.getStoneCount() ==1) {
+		
+		if(game.isCurrentPlayerPit(finalPit)&& finalPit.getStoneCount() ==1) {
 			game.getRoom().stealStones(finalPit);
 		}
 		

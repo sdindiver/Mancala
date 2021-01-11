@@ -6,6 +6,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import com.game.Enum.GameStatus;
 import com.game.Enum.KalahGameType;
 import com.game.Enum.Seat;
+import com.game.context.KalahContext;
 import com.game.strategy.MoveStrategy;
 
 public final class KalahGame implements Serializable {
@@ -117,6 +118,10 @@ public final class KalahGame implements Serializable {
 
 	public boolean isMoveAllowed(Player playerInfo) {
 		return  !playerInfo.equals(this.disAllowedPlayer);
+	}
+
+	public boolean isCurrentPlayerPit(Pit pit) {
+		return KalahContext.getCurrentTurnPlayerArea().contains(pit);
 	}
 
 }
