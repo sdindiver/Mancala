@@ -1,4 +1,4 @@
-# Mancala (Kalah) Game
+# Mancala (Kalah) Game [![Build Status](https://travis-ci.com/sdindiver/Mancala.svg?branch=main)](https://travis-ci.com/github/sdindiver/Mancala)
 Mancala(Kalah) Microservice 3/4/6 stones 
 
 This web service should enable to let 2 human players to play the game, each in his own computer. There is no AI
