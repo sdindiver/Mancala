@@ -1,5 +1,6 @@
 package com.game.entities;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeMap;
@@ -50,5 +51,8 @@ public final class PlayerArea {
 			return false;
 		}
 		return true;
+	}
+	public Collection<Pit> getPits(){
+		return this.pitIdPitMap.values();
 	}
 }

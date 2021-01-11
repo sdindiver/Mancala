@@ -2,8 +2,6 @@ package com.game.entities;
 
 import java.io.Serializable;
 
-import com.game.context.KalahContext;
-
 public class Pit implements Comparable<Pit>, Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer pitId;

@@ -20,7 +20,7 @@ public final class KalahGame implements Serializable {
 	private MoveStrategy action;
 
 	private KalahGame(KalahGameType kalahType) {
-		this.gameId = ThreadLocalRandom.current().nextInt();
+		this.gameId = Math.abs(ThreadLocalRandom.current().nextInt());
 		this.gameStatus = GameStatus.WAITING;
 		this.gameType = kalahType;
 		this.action = new MoveStrategy(this);
@@ -116,7 +116,7 @@ public final class KalahGame implements Serializable {
 	}
 
 	public boolean isMoveAllowed(Player playerInfo) {
-		return  playerInfo != this.disAllowedPlayer;
+		return  !playerInfo.equals(this.disAllowedPlayer);
 	}
 
 }

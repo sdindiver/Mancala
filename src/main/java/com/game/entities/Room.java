@@ -40,7 +40,7 @@ public class Room {
 	}
 
 
-	private Map<Seat, PlayerArea> getGameAreaMap() {
+	public Map<Seat, PlayerArea> getGameAreaMap() {
 		return gameAreaMap;
 	}
 

@@ -4,7 +4,9 @@ import com.game.Enum.Seat;
 import com.game.context.KalahContext;
 import com.game.entities.KalahGame;
 import com.game.entities.Pit;
-import com.game.exception.IllegalTurnException;
+import com.game.exception.ApplicationException;
+import com.game.exception.ApplicationException.Builder;
+import com.game.exception.ErrorCode;
 
 public class MoveStrategy {
 	
@@ -23,7 +25,7 @@ public class MoveStrategy {
 		int pitidx = pitId;
 		int finalPitIdx = pitId;
 		while(i<= iterationCnt) {
-			if(game.getRoom().addStone(pitidx++,1).isSuccess()) {
+			if(game.getRoom().addStone(++pitidx,1).isSuccess()) {
 				i++;
 				finalPitIdx=pitidx;
 			}
@@ -42,20 +44,21 @@ public class MoveStrategy {
 	}
 
 	protected boolean validateMove(int pitId) {
+		Builder errorBuilder =ApplicationException.Builder.builder();
 		if(!game.isMoveAllowed(KalahContext.getTurnPlayer())) {
-			throw new IllegalTurnException("Wrong player turn is now allowed");
+			throw errorBuilder.error(ErrorCode.TURN_CHANGED_ALREADY).build().get();
 
 		}
 		if(game.getRoom().getPit(pitId).isKalah()) {
-			throw new IllegalTurnException("Pit is Kalah. Move is not allowed");
+			throw errorBuilder.error(ErrorCode.WRONG_PIT_MOVE_NOT_ALLOWED).build().get();
 		}
 		if(game.getRoom().getPit(pitId).isEmpty()) {
-			throw new IllegalTurnException("Pit contains 0 stones. Move is not allowed");
+			throw errorBuilder.error(ErrorCode.ZERO_STONE_PIT_MOVE_NOT_ALLOWED).build().get();
 		}
 		Seat requestedTurn = Seat.getSeatType(pitId);
 		Seat actualTurn  = game.getCurrentTurnPlayerSeat();
-		if(requestedTurn != actualTurn) {
-			throw new IllegalTurnException("This is not current turn Player's pits.");
+		if(actualTurn!= null && requestedTurn != actualTurn) {
+			throw errorBuilder.error(ErrorCode.PIT_ACCESS_NOT_AUTHROIZED).build().get();
 		}
 		
 		return true;
