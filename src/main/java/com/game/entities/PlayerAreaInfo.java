@@ -1,4 +1,4 @@
-package com.game.model;
+package com.game.entities;
 
 import com.game.Enum.KalahGameType;
 import com.game.Enum.Seat;
