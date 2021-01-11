@@ -9,6 +9,11 @@ import com.game.Enum.Seat;
 import com.game.context.KalahContext;
 import com.game.strategy.MoveStrategy;
 
+/**
+ * Kalah Game Object that keeps all information of running game in its room
+ * @author indiv
+ *
+ */
 public final class KalahGame implements Serializable {
 	private static final long serialVersionUID = 1L;
 

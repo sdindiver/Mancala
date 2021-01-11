@@ -3,6 +3,11 @@ package com.game.context;
 import com.game.entities.Player;
 import com.game.entities.PlayerArea;
 
+/**
+ * Kalah Game Context that keeps request data
+ * @author indiv
+ *
+ */
 public class KalahContext {
 
 	private static ThreadLocal<KalahContextInfo> gameThreadLocal = new ThreadLocal<KalahContextInfo>() {

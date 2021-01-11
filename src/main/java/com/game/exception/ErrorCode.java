@@ -1,4 +1,9 @@
 package com.game.exception;
+/**
+ * Possible Error code in Kalah application
+ * @author indiv
+ *
+ */
 public enum ErrorCode implements ApplicationCode {
    TURN_CHANGED_ALREADY("401", "Wrong player turn is now allowed"),
    WRONG_PIT_MOVE_NOT_ALLOWED("400", "Pit is Kalah. Move is not allowed"),

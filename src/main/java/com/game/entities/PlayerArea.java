@@ -9,6 +9,10 @@ import com.game.context.KalahContext;
 import com.game.entities.Pit.StoneOperationResult;
 import com.game.model.PlayerAreaInfo;
 
+/** indicates playerarea of kalah game. kalah game can contain two player area since its 2 player game
+ * @author indiv
+ *
+ */
 public final class PlayerArea {
 
 	private Map<Integer,Pit> pitIdPitMap = new TreeMap<>();

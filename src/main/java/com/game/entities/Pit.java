@@ -2,6 +2,11 @@ package com.game.entities;
 
 import java.io.Serializable;
 
+/**
+ * Pit of specific player area
+ * @author indiv
+ *
+ */
 public class Pit implements Comparable<Pit>, Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer pitId;

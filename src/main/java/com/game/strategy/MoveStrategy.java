@@ -8,6 +8,11 @@ import com.game.exception.ApplicationException;
 import com.game.exception.ApplicationException.Builder;
 import com.game.exception.ErrorCode;
 
+/**main Business logic layer to be performed if player makes a move, It perfoms validation and makes a move and changes
+ * player turn
+ * @author indiv
+ *
+ */
 public class MoveStrategy {
 	
 	private KalahGame game;

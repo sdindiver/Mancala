@@ -3,6 +3,11 @@ package com.game.context;
 import com.game.entities.Player;
 import com.game.entities.PlayerArea;
 
+/**
+ * KalahContext data Holder
+ * @author indiv
+ *
+ */
 class KalahContextInfo {
 	private Player turnPlayer;
 	

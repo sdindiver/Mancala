@@ -13,7 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
- * @author asingh
+ * @author ink
  * Document the endpoint with details
  */
 @Configuration
@@ -39,3 +39,4 @@ public class SwaggerConfig {
     }
 
 }
+ 

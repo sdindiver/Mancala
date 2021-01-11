@@ -1,6 +1,5 @@
 package com.game.controller;
 
-import java.net.InetAddress;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -28,6 +27,11 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+/**
+ * Kalah Lobby controller for creation and joining game endpoints
+ * @author indiv
+ *
+ */
 @RestController
 public class KalahLobbyController {
 	private KalahGameService kalahService;
@@ -39,6 +43,11 @@ public class KalahLobbyController {
 		this.kalahService = kalahService;
 		this.environment = environment;
 	}
+	/**
+	 * Create new game if not exist otherwise joins waiting game
+	 * @param session
+	 * @return
+	 */
 	@ApiOperation(value = "Create or get game",  response = GameResponse.class,
             tags = {"Games"})
     @ApiResponses(value = {
@@ -47,7 +56,7 @@ public class KalahLobbyController {
     @PostMapping("/games")
 	public ResponseEntity<GameResponse> joinGame(HttpSession session) {
 		Player playerInfo = new Player(session.getId());
-		KalahGame game = kalahService.getWaitingGame();
+		KalahGame game = kalahService.createOrGetWaitingGame();
 		kalahService.joinPlayer(game, playerInfo);
 		GameResponse response = new GameResponse();
 		response.setId(game.getGameId());
@@ -55,7 +64,14 @@ public class KalahLobbyController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
-	 @ApiOperation(value = "Play the game with pit value", notes = "", response = GameResponse.class,
+	 /**
+	  * Operation handled if player makes a move
+	 * @param session
+	 * @param gameId
+	 * @param pitId
+	 * @return
+	 */
+	@ApiOperation(value = "Play the game with pit value", notes = "", response = GameResponse.class,
 	            tags = {"Game Play"})
 	 @ApiResponses(value = {
 	            @ApiResponse(code = 200, message = "Returns the game info with status", response = GameResponse.class),

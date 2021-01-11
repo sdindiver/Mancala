@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/** Kalah Game application exception segregated by application code
+ * @author indiv
+ *
+ */
 public class ApplicationException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;

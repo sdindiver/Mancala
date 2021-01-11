@@ -62,7 +62,7 @@ public class KalahGameControllerTest {
 
     @Test
     public void testPlay() throws Exception {
-    	KalahGame game = this.service.getWaitingGame();
+    	KalahGame game = this.service.createOrGetWaitingGame();
         Player firstPlayer = new Player("1");
         this.service.joinPlayer(game,firstPlayer);
         Player secondPlayer = new Player("2");

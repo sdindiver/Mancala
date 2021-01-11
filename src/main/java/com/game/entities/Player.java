@@ -1,5 +1,9 @@
 package com.game.entities;
 
+/** Player of Kalah Game
+ * @author indiv
+ *
+ */
 public final class Player {
 
 	private String playerId;

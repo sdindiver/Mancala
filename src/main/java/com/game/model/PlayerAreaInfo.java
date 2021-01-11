@@ -3,6 +3,10 @@ package com.game.model;
 import com.game.Enum.KalahGameType;
 import com.game.Enum.Seat;
 
+/** Player Area data holder
+ * @author indiv
+ *
+ */
 public class PlayerAreaInfo {
 	private Seat seatType;
 	private KalahGameType gameType;

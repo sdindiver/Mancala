@@ -12,11 +12,16 @@ import com.game.entities.KalahGame;
 import com.game.exception.ApplicationException;
 import com.game.exception.ErrorCode;
 
+/**
+ * Kalah in memory cache Game for created games and responsible for creating game
+ * @author indiv
+ *
+ */
 @Component
 public class KalahGameRepository {
 	
 	private final Map<Integer,KalahGame> games = new HashMap<>();
-	public KalahGame getGame(GameStatus gameStatus) {
+	public KalahGame createOrGetWaitingGame(GameStatus gameStatus) {
 		Optional<KalahGame> kalha =  games.values().stream().filter(x-> x.hasGameStatus(gameStatus)).findFirst();
 		if(kalha.isPresent()) {
 		  return kalha.get();	

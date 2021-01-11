@@ -8,6 +8,10 @@ import com.game.context.KalahContext;
 import com.game.entities.Pit.StoneOperationResult;
 import com.game.model.PlayerAreaInfo;
 
+/** Gaming room associated with Kalah game
+ * @author indiv
+ *
+ */
 public class Room {
 
 	private Map<Seat,PlayerArea> gameAreaMap = new HashMap<>();

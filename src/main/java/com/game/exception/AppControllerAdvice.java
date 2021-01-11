@@ -8,6 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/** Global exeption handler and response mapper
+ * @author indiv
+ *
+ */
 @ControllerAdvice
 public class AppControllerAdvice {
 
