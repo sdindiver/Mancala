@@ -19,6 +19,7 @@ public class Room {
 	private Map<Seat, PlayerArea> gameAreaMap = new HashMap<>();
 	private Map<Player, Seat> playersMap = new HashMap<>();
 	private int seatedPlayerCount = 0;
+	@SuppressWarnings("unused")
 	private KalahGame game;
 
 	public static final int MAX_PLAYER_COUNT = 2;
