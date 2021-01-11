@@ -1,4 +1,4 @@
-package com.games.dto;
+package com.game.dto;
 
 import java.util.Map;
 

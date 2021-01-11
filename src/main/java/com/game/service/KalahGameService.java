@@ -10,7 +10,7 @@ import com.game.entities.KalahGame;
 import com.game.entities.Player;
 
 @Service("kalahService")
-public class KalahService {
+public class KalahGameService {
 
 	@Autowired
 	private KalahGameRepository repository;

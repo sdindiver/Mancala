@@ -8,11 +8,11 @@ public class Pit implements Comparable<Pit>, Serializable {
 	private int stoneCount;
 	private boolean isKalah;
 
-	public Pit(int pitId, int stoneCount, boolean isKalah) {
+	public Pit(int pitId, int stoneCount) {
 		super();
 		this.pitId = pitId;
+		this.isKalah = this.pitId==7 || this.pitId==14;
 		this.stoneCount = isKalah ? 0 : stoneCount;
-		this.isKalah = isKalah;
 	}
 
 	public int getPitId() {

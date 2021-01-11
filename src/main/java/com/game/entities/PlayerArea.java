@@ -22,7 +22,7 @@ public final class PlayerArea {
 		int pitStartIdx = areaInfo.getSeatType().getPitStartIdx();
 		for(int i=1;i<=7;i++) {
 			int id = pitStartIdx++;
-			pitIdPitMap.put(id,new Pit(id, areaInfo.getGameType().getStoneCount(), false));
+			pitIdPitMap.put(id,new Pit(id, areaInfo.getGameType().getStoneCount()));
 		}
 		return new PlayerArea(pitIdPitMap);
 	}
