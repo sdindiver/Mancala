@@ -46,7 +46,9 @@ public class KalahGameService {
 		KalahGame game = repository.getGame(gameId);
 		KalahContext.setTurn(playerInfo);
 
-		return game.makeMove(pitId);
+		game.makeMove(pitId);
+		KalahContext.remove();
+		return game;
 
 	}
 

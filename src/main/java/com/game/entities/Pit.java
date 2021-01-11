@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Pit of specific player area
+ * 
  * @author indiv
  *
  */
@@ -16,7 +17,7 @@ public class Pit implements Comparable<Pit>, Serializable {
 	public Pit(int pitId, int stoneCount) {
 		super();
 		this.pitId = pitId;
-		this.isKalah = this.pitId==7 || this.pitId==14;
+		this.isKalah = this.pitId == 7 || this.pitId == 14;
 		this.stoneCount = isKalah ? 0 : stoneCount;
 	}
 
@@ -30,14 +31,6 @@ public class Pit implements Comparable<Pit>, Serializable {
 
 	public boolean isKalah() {
 		return isKalah;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((pitId == null) ? 0 : pitId.hashCode());
-		return result;
 	}
 
 	@Override
@@ -63,41 +56,35 @@ public class Pit implements Comparable<Pit>, Serializable {
 	}
 
 	public void makeEmpty() {
-		stoneCount=0;
-	}
-
-	public StoneOperationResult removeStone(int subtractBy) {
-		if(isKalah) {
-			return new StoneOperationResult(false, stoneCount);
-		}
-		stoneCount-=subtractBy;
-		return new StoneOperationResult(true, stoneCount);
-
+		stoneCount = 0;
 	}
 
 	public StoneOperationResult addStone(int increasedBy) {
-		stoneCount+=increasedBy;
+		stoneCount += increasedBy;
 		return new StoneOperationResult(true, stoneCount);
 	}
-	
-	public static class StoneOperationResult{
+
+	public static class StoneOperationResult {
 		private boolean isSuccess;
 		private int stoneCount;
+
 		public StoneOperationResult(boolean isSuccess, int stoneCount) {
 			super();
 			this.isSuccess = isSuccess;
 			this.stoneCount = stoneCount;
 		}
+
 		public boolean isSuccess() {
 			return isSuccess;
 		}
+
 		public int getStoneCount() {
 			return stoneCount;
 		}
 	}
 
 	public boolean isEmpty() {
-		return stoneCount==0;
+		return stoneCount == 0;
 	}
 
 }

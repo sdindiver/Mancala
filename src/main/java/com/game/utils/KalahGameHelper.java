@@ -6,7 +6,11 @@ import java.net.InetAddress;
  * @author indiv
  *
  */
-public class KalahGameHelper {
+public final class KalahGameHelper {
+	
+	private KalahGameHelper() {
+		super();
+	}
 
 	public static String getUrl(String port, final int gameId) {
 		return String.format("http://%s:%s/games/%s", InetAddress.getLoopbackAddress().getHostName(), port, gameId);

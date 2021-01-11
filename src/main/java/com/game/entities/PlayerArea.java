@@ -44,10 +44,6 @@ public final class PlayerArea {
 		return pit.addStone(increasedBy);
 	}
 
-	public StoneOperationResult removeStone(int pitId, int subtractBy) {
-		Pit pit = getPit(pitId);
-		return pit.removeStone(subtractBy);
-	}
 
 	public boolean isEmpty() {
 		Optional<Pit> pit = pitIdPitMap.values().stream().filter(x-> x.getStoneCount()==0 && !x.isKalah()).findAny();

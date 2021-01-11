@@ -8,7 +8,11 @@ import com.game.entities.PlayerArea;
  * @author indiv
  *
  */
-public class KalahContext {
+public final class KalahContext {
+	
+	private KalahContext() {
+		super();
+	}
 
 	private static ThreadLocal<KalahContextInfo> gameThreadLocal = new ThreadLocal<KalahContextInfo>() {
 		protected KalahContextInfo initialValue() {
@@ -32,4 +36,13 @@ public class KalahContext {
 	public static PlayerArea getCurrentTurnPlayerArea() {
 		return gameThreadLocal.get().getTurnPlayerArea();
 	}
+	
+	public static void remove() {
+		gameThreadLocal.remove();
+	}
+
 }
+
+
+
+	
