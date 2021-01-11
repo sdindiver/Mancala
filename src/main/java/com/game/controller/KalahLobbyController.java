@@ -9,21 +9,24 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.env.Environment;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.entities.KalahGame;
 import com.game.entities.Pit;
 import com.game.entities.Player;
+import com.game.exception.AppControllerAdvice;
 import com.game.service.KalahService;
 import com.games.dto.GameResponse;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
-@RequestMapping(path = "/games")
 public class KalahLobbyController {
 	private KalahService kalahService;
 	private final Environment environment;
@@ -34,8 +37,12 @@ public class KalahLobbyController {
 		this.kalahService = kalahService;
 		this.environment = environment;
 	}
-
-	@RequestMapping(path = "/", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ApiOperation(value = "Create or get game",  response = GameResponse.class,
+            tags = {"Games"})
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Returns the game detail with url", response = GameResponse.class),
+            @ApiResponse(code = 400, message = "Error Details", response = AppControllerAdvice.Reason.class)})
+    @PostMapping("/games")
 	public ResponseEntity<Object> joinGame(HttpSession session) {
 		Player playerInfo = new Player(session.getId());
 		KalahGame game = kalahService.getWaitingGame();
@@ -46,7 +53,14 @@ public class KalahLobbyController {
 		return ResponseEntity.ok(response);
 	}
 
-	@RequestMapping(path = "/{gameId}/pits/{pitId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	 @ApiOperation(value = "Play the game with pit value", notes = "", response = GameResponse.class,
+	            tags = {"Game Play"})
+	 @ApiResponses(value = {
+	            @ApiResponse(code = 200, message = "Returns the game info with status", response = GameResponse.class),
+	            @ApiResponse(code = 404, message = "Error Details", response = AppControllerAdvice.Reason.class),
+	            @ApiResponse(code = 400, message = "Error Details", response = AppControllerAdvice.Reason.class),
+	            @ApiResponse(code = 401, message = "Error Details", response = AppControllerAdvice.Reason.class)})
+    @PutMapping("/games/{gameId}/pits/{pitId}")
 	public ResponseEntity<Object> makeMove(HttpSession session, @PathVariable("gameId") int gameId,
 			@PathVariable("pitId") int pitId) {
 		Player playerInfo = new Player(session.getId());
